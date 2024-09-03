@@ -15,6 +15,6 @@ router.get("/home", (req, res) => {
 });
 
 router.post("/register", Register);
-router.post("/update/:stbid", UpdateData);
+router.post("/update/:id", UpdateData);
 router.get("/getstbs", getAllStbs);
 module.exports = router;

@@ -31,15 +31,17 @@ const Register = async (req, res) => {
 };
 
 const UpdateData = async (req, res) => {
-  const { name, phone } = req.body;
-  const stbid = req.params.stbid;
+  const { stbid, name, phone } = req.body;
+  const objectid = req.params.id;
+  console.log(objectid);
 
-  if (!stbid || !name || !phone)
+  if (!stbid || !name || !phone || !objectid)
     return res
       .status(500)
       .json({ message: "all feilds required", status: "fail" });
 
-  const findStb = await stbModel.findOne({ stbid: stbid });
+  const findStb = await stbModel.findOne({ _id: objectid });
+  console.log(findStb);
 
   if (!findStb)
     return res
@@ -48,8 +50,8 @@ const UpdateData = async (req, res) => {
 
   try {
     const upstb = await stbModel.findOneAndUpdate(
-      { stbid, stbid },
-      { name, phone },
+      { _id: objectid },
+      { stbid, name, phone },
       { timestamps: true },
       { new: true }
     );
